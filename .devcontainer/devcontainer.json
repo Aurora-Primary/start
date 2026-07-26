@@ -1,0 +1,6 @@
+{
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+  },
+  "postCreateCommand": "npm install && nohup bash -c 'while true; do npm run dev -- --host 0.0.0.0 --port 3000; sleep 2; done' > /tmp/vite.log 2>&1 &"
+}
