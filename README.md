@@ -3,7 +3,7 @@
 <img src="assets/readme/aurora-wordmark.png" alt="" width="200" style="display: block; margin: 0 auto -28px;">
 
 <p style="margin: 0;">
-  <strong style="font-size: 2em;">{{PROJECT_NAME}}</strong><br>
+  <strong style="font-size: 2em;">Your Aurora App</strong><br>
   <em>A mobile app exported from <a href="https://auroradev.me">Aurora</a> — ready to run locally, ship to TestFlight, or publish to the App Store.</em>
 </p>
 
@@ -17,10 +17,10 @@
 
 This repository is your project's source code. It started as the [Aurora-Primary/start](https://github.com/Aurora-Primary/start) template, customized with your app during export.
 
-When you tap **Export** in Aurora, the app copies this project into a new repository under your GitHub account. You'll see:
+When you tap **Export** in Aurora, the app copies this project into a new repository under your GitHub account:
 
 > **Repository copied successfully**  
-> *{repo} is now available in your GitHub account.*
+> *Your new repository is now available in your GitHub account.*
 
 You own this repo. You can keep building in Aurora separately — export creates a snapshot you can develop further on your Mac.
 
@@ -62,10 +62,14 @@ You'll run a few commands in **Terminal** — macOS's built-in command line app.
 
 ### 1. Clone your repo
 
+If you haven't cloned this project yet, copy the clone URL from your repo's GitHub page, or run:
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/{{PROJECT_NAME}}.git
-cd {{PROJECT_NAME}}
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 ```
+
+Replace `YOUR_USERNAME` and `YOUR_REPO` with your GitHub username and repository name.
 
 ### 2. Install dependencies
 
@@ -101,7 +105,7 @@ The simulator runs the same Capacitor-wrapped build as a real device.
 2. In Xcode, select your **iPhone** as the run destination.
 3. Select the **App** target → **Signing & Capabilities**.
 4. Set **Team** to your Apple ID / developer team.
-5. Change **Bundle Identifier** from `com.appstarter.app` to something unique (e.g. `com.yourname.{{PROJECT_NAME}}`).
+5. Change **Bundle Identifier** from `com.appstarter.app` to something unique (e.g. `com.yourname.yourapp`).
 6. Press **⌘R**. Approve the developer trust prompt on your iPhone if asked.
 
 > Re-run `npm run build:ios` (or `npm run ios`) in Terminal whenever you change code in `src/` and want those changes on your iPhone.
@@ -126,7 +130,7 @@ Also update `capacitor.config.ts` (`appName`, `appId`) to match your branding.
 1. Select the **App** target in Xcode.
 2. **Signing & Capabilities** → enable **Automatically manage signing**.
 3. Choose your **Team** (paid Apple Developer account).
-4. Set a unique **Bundle Identifier** (e.g. `com.yourname.{{PROJECT_NAME}}`).
+4. Set a unique **Bundle Identifier** (e.g. `com.yourname.yourapp`).
 
 ### 3. Version & build number
 
@@ -168,7 +172,7 @@ Exporting does **not** disconnect your Aurora project. It creates a copy you can
 ## Project structure
 
 ```
-{{PROJECT_NAME}}/
+.
 ├── src/
 │   ├── routes/           # Pages (file-based routing)
 │   │   ├── __root.tsx    # App shell, meta tags, layout
