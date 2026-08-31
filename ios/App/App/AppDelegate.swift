@@ -8,6 +8,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        // Match the CAPBridgeViewController's background to the app's real
+        // theme color. Without this, Capacitor's bridge view defaults to
+        // black until the WebView actually has content painted into it,
+        // producing a black flash between the (white) launch screen
+        // disappearing and the real app content appearing.
+        window?.rootViewController?.view.backgroundColor = .white
+
         return true
     }
 
