@@ -43,6 +43,8 @@ const SimulatedPurchaseSheet = ({
   onConfirm,
   onCancel,
 }: SimulatedPurchaseSheetProps) => {
+  const [iconFailed, setIconFailed] = React.useState(false);
+
   const handleCancel = () => {
     onCancel?.();
     onOpenChange(false);
@@ -69,14 +71,22 @@ const SimulatedPurchaseSheet = ({
 
         <div className="flex flex-col gap-4 px-5 pb-1 pt-4">
           <div className="flex items-stretch gap-3">
-            <div className="relative aspect-square shrink-0 self-stretch overflow-hidden rounded-[11px] shadow-sm">
-              <img
-                src="/apple-touch-icon.png"
-                alt=""
+            {iconFailed ? (
+              <div
                 aria-hidden="true"
-                className="absolute inset-0 size-full object-cover"
+                className="h-14 w-14 shrink-0 overflow-hidden rounded-[11px] bg-muted shadow-sm"
               />
-            </div>
+            ) : (
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-[11px] shadow-sm">
+                <img
+                  src="/apple-touch-icon.png"
+                  alt=""
+                  aria-hidden="true"
+                  className="size-full rounded-[11px] object-cover"
+                  onError={() => setIconFailed(true)}
+                />
+              </div>
+            )}
 
             <DialogHeader className="min-w-0 flex-1 justify-center space-y-0 text-left sm:text-left">
               <DialogTitle className="text-base">{productName}</DialogTitle>
