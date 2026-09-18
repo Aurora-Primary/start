@@ -44,6 +44,15 @@ const SimulatedPurchaseSheet = ({
   onCancel,
 }: SimulatedPurchaseSheetProps) => {
   const [iconFailed, setIconFailed] = React.useState(false);
+  const [iconSize, setIconSize] = React.useState(56);
+  const textBlockRef = React.useRef<HTMLDivElement>(null);
+
+  React.useLayoutEffect(() => {
+    if (!open) return;
+    const el = textBlockRef.current;
+    if (!el) return;
+    setIconSize(el.offsetHeight);
+  }, [open, productName, price]);
 
   const handleCancel = () => {
     onCancel?.();
@@ -54,6 +63,8 @@ const SimulatedPurchaseSheet = ({
     onConfirm();
     onOpenChange(false);
   };
+
+  const iconStyle = { height: iconSize, width: iconSize };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -70,14 +81,18 @@ const SimulatedPurchaseSheet = ({
         </div>
 
         <div className="flex flex-col gap-4 px-5 pb-1 pt-4">
-          <div className="flex items-stretch gap-3">
+          <div className="flex items-center gap-3">
             {iconFailed ? (
               <div
                 aria-hidden="true"
-                className="h-14 w-14 shrink-0 overflow-hidden rounded-[11px] bg-muted shadow-sm"
+                className="shrink-0 overflow-hidden rounded-[11px] bg-muted shadow-sm"
+                style={iconStyle}
               />
             ) : (
-              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-[11px] shadow-sm">
+              <div
+                className="shrink-0 overflow-hidden rounded-[11px] shadow-sm"
+                style={iconStyle}
+              >
                 <img
                   src="/apple-touch-icon.png"
                   alt=""
@@ -88,13 +103,17 @@ const SimulatedPurchaseSheet = ({
               </div>
             )}
 
-            <DialogHeader className="min-w-0 flex-1 justify-center space-y-0 text-left sm:text-left">
-              <DialogTitle className="text-base">{productName}</DialogTitle>
-              <p className="-mt-0.5 text-xs font-medium text-muted-foreground">Your App</p>
-              <DialogDescription className="pt-1.5 text-sm font-medium text-foreground">
-                {price}
-              </DialogDescription>
-            </DialogHeader>
+            <div ref={textBlockRef} className="min-w-0 flex-1">
+              <DialogHeader className="justify-center space-y-0 text-left sm:text-left">
+                <DialogTitle className="text-base leading-tight">{productName}</DialogTitle>
+                <p className="-mt-0.5 text-xs font-medium leading-tight text-muted-foreground">
+                  Your App
+                </p>
+                <DialogDescription className="pt-1 text-sm font-medium leading-tight text-foreground">
+                  {price}
+                </DialogDescription>
+              </DialogHeader>
+            </div>
           </div>
 
           <p className="text-xs leading-relaxed text-muted-foreground">
