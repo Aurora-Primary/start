@@ -162,6 +162,14 @@
  *   top-safe / bottom-safe     -> position inside the safe area (headers, tab bars)
  *   pt-safe / pb-safe          -> pad content that sits flush to a screen edge
  *   sticky top-safe            -> sticky header that stops below the notch
+ *
+ * Height gotcha: h-* includes padding, so put the safe padding on an OUTER
+ * wrapper and the fixed height on an INNER row. Bottom tab bar:
+ *   <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background pb-safe">
+ *     <div className="flex h-16 items-center justify-around">...</div>
+ *   </nav>
+ * Fixed or sticky bars need an opaque (or blurred) background, and the page
+ * needs bottom padding so content isn't hidden behind a fixed bar.
  */
 @utility top-safe { top: var(--safe-top); }
 @utility bottom-safe { bottom: var(--safe-bottom); }
