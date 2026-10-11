@@ -168,10 +168,28 @@
  *   <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background pb-safe">
  *     <div className="flex h-16 items-center justify-around">...</div>
  *   </nav>
- * Fixed or sticky bars need an opaque (or blurred) background, and the page
- * needs bottom padding so content isn't hidden behind a fixed bar.
+ * Sticky header (stops below the notch, opaque so nothing shows through):
+ *   <header className="sticky top-safe z-40 border-b bg-background">
+ *     <div className="flex h-14 items-center px-4">...</div>
+ *   </header>
+ * Never use a bare "sticky top-0" or "fixed top-0" for headers: they slide
+ * under the notch. Don't use translucent backgrounds (bg-background/80,
+ * backdrop-blur) on fixed or sticky bars; use plain bg-background.
+ * Fixed bars need page bottom padding so content isn't hidden behind them.
  */
 @utility top-safe { top: var(--safe-top); }
 @utility bottom-safe { bottom: var(--safe-bottom); }
 @utility pt-safe { padding-top: var(--safe-top); }
 @utility pb-safe { padding-bottom: var(--safe-bottom); }
+
+/* Paints the page background behind the notch / status bar so scrolled content
+ * never shows through that strip (sticky headers sit just below it). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--safe-top);
+  background: var(--color-background);
+  z-index: 45;
+  pointer-events: none;
+}
