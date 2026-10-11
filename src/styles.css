@@ -153,3 +153,17 @@
 
 .min-h-screen { min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom)); }
 .h-screen { height: calc(100dvh - var(--safe-top) - var(--safe-bottom)); }
+
+/*
+ * iPhone safe areas.
+ * <body> is already padded by the safe insets (see @layer base), so normal-flow
+ * content needs nothing. Elements that are position: fixed or sticky are laid
+ * out against the viewport and IGNORE that padding, so give them these:
+ *   top-safe / bottom-safe     -> position inside the safe area (headers, tab bars)
+ *   pt-safe / pb-safe          -> pad content that sits flush to a screen edge
+ *   sticky top-safe            -> sticky header that stops below the notch
+ */
+@utility top-safe { top: var(--safe-top); }
+@utility bottom-safe { bottom: var(--safe-bottom); }
+@utility pt-safe { padding-top: var(--safe-top); }
+@utility pb-safe { padding-bottom: var(--safe-bottom); }
